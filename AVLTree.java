@@ -1,14 +1,7 @@
 
 //  AVL Tree Implementation - Java
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class AVLTree {
     private TreeNode root;
-
-    private static final int MAX_HEIGHT = 15;
-    private static int[] startSpacing = null, middleSpacing = null;
 
     public TreeNode getRoot() {
         return root;
@@ -41,8 +34,10 @@ public class AVLTree {
         }
         root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1); // update height for balanceFactor purpose
         int rootBalanceFactor = getBalanceFactor(root);
+
         if (rootBalanceFactor > 1) {                                                    // if left subtree is unbalanced
             int leftBalanceFactor = getBalanceFactor(root.getLeft());
+
             if (leftBalanceFactor < 0) {                                                // for LR rotation
                 root.setLeft(leftRotate(root.getLeft()));
             }
@@ -51,6 +46,7 @@ public class AVLTree {
         }
         if (rootBalanceFactor < -1) {                                                   // if right subtree is unbalanced
             int rightBalanceFactor = getBalanceFactor(root.getRight());
+
             if (rightBalanceFactor > 0) {
                 root.setRight(rightRotate(root.getRight()));                            // for RL rotation
             }
@@ -68,11 +64,13 @@ public class AVLTree {
             return root.getData();
         }
         int result = getMax(root.getRight());
+
         return result;
     }
 
     public boolean search(int data) {
         boolean result = search(root, data);
+
         return result;
     }
 
@@ -82,10 +80,12 @@ public class AVLTree {
         }
         if (data < root.getData()) {
             boolean result = search(root.getLeft(), data);
+
             return result;
         }
         if (data > root.getData()) {
             boolean result = search(root.getRight(), data);
+
             return result;
         }
         return true;
@@ -108,6 +108,7 @@ public class AVLTree {
         }
         root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);  // update height for balanceFactor purpose
         int rootBalanceFactor = getBalanceFactor(root);
+
         if (rootBalanceFactor > 1) {                                                    // if left subtree is unbalanced
             if (data > root.getLeft().getData()) {                                      // LR case
                 root.setLeft(leftRotate(root.getLeft()));
@@ -130,6 +131,7 @@ public class AVLTree {
             return 0;
         }
         int result = height(root.getLeft()) - height(root.getRight());
+
         return result;
     }
 
@@ -148,6 +150,7 @@ public class AVLTree {
             return root;
         }
         TreeNode rightChild = root.getRight();
+
         root.setRight(rightChild.getLeft());
         rightChild.setLeft(root);
         root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);
@@ -163,75 +166,11 @@ public class AVLTree {
             return root;
         }
         TreeNode leftChild = root.getLeft();
+        
         root.setLeft(leftChild.getRight());
         leftChild.setRight(root);
         root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);
         leftChild.setHeight(Math.max(height(leftChild.getLeft()), height(leftChild.getRight())) + 1);
         return leftChild;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        if (startSpacing == null || middleSpacing == null) {
-            init();
-        }
-        List<List<TreeNode>> levelList = getLevelOrder(root);
-        int maxDepth = levelList.size() - 1;
-        for (int i = 0; i <= maxDepth; i++) {
-            List<TreeNode> nodeList = levelList.get(i);
-            int currentHeight = maxDepth - i;
-            result.append(new String(new char[startSpacing[currentHeight]]).replace("\0", " "));
-            String middleSpace = new String(new char[middleSpacing[currentHeight]]).replace("\0", " ");
-            for (int size = nodeList.size(), j = 0; j < size; j++) {
-                String dataString = nodeList.get(j) == null ? "   " : String.format("%3d", nodeList.get(j).getData());
-                result.append(dataString);
-                if (j < size - 1) {
-                    result.append(middleSpace);
-                }
-            }
-            result.append(new String(new char[currentHeight]).replace("\0", "\n"));
-        }
-        String resultString = result.toString();
-        return resultString;
-    }
-
-    private static void init() {
-        startSpacing = new int[MAX_HEIGHT];
-        startSpacing[0] = 0;
-        for (int i = 1; i < 10; i++) {
-            startSpacing[i] = startSpacing[i - 1] * 2 + 2;
-        }
-        middleSpacing = new int[MAX_HEIGHT];
-        middleSpacing[0] = 1;
-        for (int i = 1; i < 10; i++) {
-            middleSpacing[i] = middleSpacing[i - 1] + (1 << (i + 1));
-        }
-    }
-
-    private static List<List<TreeNode>> getLevelOrder(TreeNode root) {
-        List<List<TreeNode>> result = new ArrayList<>();
-        result.add(new ArrayList<>(Arrays.asList(root)));
-        int currentDepth = 0;
-        while (currentDepth < result.size()) {
-            List<TreeNode> currentList = result.get(currentDepth++);
-            List<TreeNode> nextList = new ArrayList<>();
-            for (TreeNode currentNode : currentList) {
-                nextList.add(currentNode != null ? currentNode.getLeft() : null);
-                nextList.add(currentNode != null ? currentNode.getRight() : null);
-            }
-            if (notAllNull(nextList))
-                result.add(nextList);
-        }
-        return result;
-    }
-
-    private static boolean notAllNull(List<TreeNode> list) {
-        for (TreeNode ele : list) {
-            if (ele != null) {
-                return true;
-            }
-        }
-        return false;
     }
 }
