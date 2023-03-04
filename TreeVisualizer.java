@@ -59,17 +59,25 @@ public class TreeVisualizer {
             List<TreeNode> nextList = new ArrayList<>();
 
             for (TreeNode currentNode : currentList) {
-                if (currentNode.getLeft() != null) {
-                    nextList.add(currentNode.getLeft());
+                if (currentNode == null) {
+                    continue;
                 }
-                if (currentNode.getRight() != null) {
-                    nextList.add(currentNode.getRight());
-                }
+                nextList.add(currentNode.getLeft());
+                nextList.add(currentNode.getRight());
             }
-            if (nextList.size() > 0) {
+            if (isNotAllNull(nextList)) {
                 result.add(nextList);
             }
         }
         return result;
+    }
+
+    private boolean isNotAllNull(List<TreeNode> list) {
+        for (TreeNode ele : list) {
+            if (ele != null) {
+                return true;
+            }
+        }
+        return false;
     }
 }
