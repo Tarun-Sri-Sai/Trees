@@ -14,7 +14,7 @@ public class AVLTree {
         return root;
     }
 
-    AVLTree() {
+    public AVLTree() {
         root = null;
     }
 
@@ -23,36 +23,36 @@ public class AVLTree {
     }
 
     private static TreeNode delete(TreeNode root, int data) {
-        if (root == null) { // empty tree
+        if (root == null) {                                                             // empty tree
             return root;
         }
-        if (data < root.data) { // target on left side of tree
-            root.left = delete(root.left, data);
-        } else if (data > root.data) { // target on right side of tree
-            root.right = delete(root.right, data);
-        } else if (root.left == null || root.right == null) { // root is target, but less than two children
-            root = root.left != null ? root.left : root.right;
-        } else { // root is target, but two children
-            root.data = getMax(root.left);
-            root.left = delete(root.left, root.data);
+        if (data < root.getData()) {                                                    // target on left side of tree
+            root.setLeft(delete(root.getLeft(), data));
+        } else if (data > root.getData()) {                                             // target on right side of tree
+            root.setRight(delete(root.getRight(), data));
+        } else if (root.getLeft() == null || root.getRight() == null) {                 // root is target, but less than two children
+            root = root.getLeft() != null ? root.getLeft() : root.getRight();
+        } else {                                                                        // root is target, but two children
+            root.setData(getMax(root.getLeft()));
+            root.setLeft(delete(root.getLeft(), root.getData()));
         }
         if (root == null) {
             return root;
         }
-        root.height = Math.max(height(root.left), height(root.right)) + 1; // update height for balanceFactor purpose
+        root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1); // update height for balanceFactor purpose
         int rootBalanceFactor = getBalanceFactor(root);
-        if (rootBalanceFactor > 1) { // if left subtree is unbalanced
-            int leftBalanceFactor = getBalanceFactor(root.left);
-            if (leftBalanceFactor < 0) { // for LR rotation
-                root.left = leftRotate(root.left);
+        if (rootBalanceFactor > 1) {                                                    // if left subtree is unbalanced
+            int leftBalanceFactor = getBalanceFactor(root.getLeft());
+            if (leftBalanceFactor < 0) {                                                // for LR rotation
+                root.setLeft(leftRotate(root.getLeft()));
             }
             root = rightRotate(root);
             return root;
         }
-        if (rootBalanceFactor < -1) { // if right subtree is unbalanced
-            int rightBalanceFactor = getBalanceFactor(root.right);
+        if (rootBalanceFactor < -1) {                                                   // if right subtree is unbalanced
+            int rightBalanceFactor = getBalanceFactor(root.getRight());
             if (rightBalanceFactor > 0) {
-                root.right = rightRotate(root.right); // for RL rotation
+                root.setRight(rightRotate(root.getRight()));                            // for RL rotation
             }
             root = leftRotate(root);
             return root;
@@ -64,10 +64,10 @@ public class AVLTree {
         if (root == null) {
             return Integer.MIN_VALUE;
         }
-        if (root.right == null) {
-            return root.data;
+        if (root.getRight() == null) {
+            return root.getData();
         }
-        int result = getMax(root.right);
+        int result = getMax(root.getRight());
         return result;
     }
 
@@ -80,12 +80,12 @@ public class AVLTree {
         if (root == null) {
             return false;
         }
-        if (data < root.data) {
-            boolean result = search(root.left, data);
+        if (data < root.getData()) {
+            boolean result = search(root.getLeft(), data);
             return result;
         }
-        if (data > root.data) {
-            boolean result = search(root.right, data);
+        if (data > root.getData()) {
+            boolean result = search(root.getRight(), data);
             return result;
         }
         return true;
@@ -96,30 +96,30 @@ public class AVLTree {
     }
 
     private static TreeNode insert(TreeNode root, int data) {
-        if (root == null) { // create new node at target location
+        if (root == null) {                                                             // create new node at target location
             return new TreeNode(data);
         }
-        if (data < root.data) { // target in left subtree
-            root.left = insert(root.left, data);
-        } else if (data > root.data) { // target in right subtree
-            root.right = insert(root.right, data);
-        } else { // target already exists
+        if (data < root.getData()) {                                                    // target in left subtree
+            root.setLeft(insert(root.getLeft(), data));
+        } else if (data > root.getData()) {                                             // target in right subtree
+            root.setRight(insert(root.getRight(), data));
+        } else {                                                                        // target already exists
             return root;
         }
-        root.height = Math.max(height(root.left), height(root.right)) + 1; // update height for balanceFactor purpose
+        root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);  // update height for balanceFactor purpose
         int rootBalanceFactor = getBalanceFactor(root);
-        if (rootBalanceFactor > 1) { // if left subtree is unbalanced
-            if (data > root.left.data) { // LR case
-                root.left = leftRotate(root.left);
+        if (rootBalanceFactor > 1) {                                                    // if left subtree is unbalanced
+            if (data > root.getLeft().getData()) {                                      // LR case
+                root.setLeft(leftRotate(root.getLeft()));
             }
-            root = rightRotate(root); // right rotation necessary in both cases
+            root = rightRotate(root);                                                   // right rotation necessary in both cases
             return root;
         }
-        if (rootBalanceFactor < -1) { // if right subtree is unbalanced
-            if (data < root.right.data) { // RL case
-                root.right = rightRotate(root.right);
+        if (rootBalanceFactor < -1) {                                                   // if right subtree is unbalanced
+            if (data < root.getRight().getData()) {                                     // RL case
+                root.setRight(rightRotate(root.getRight()));
             }
-            root = leftRotate(root); // left rotation necessary in both cases
+            root = leftRotate(root);                                                    // left rotation necessary in both cases
             return root;
         }
         return root;
@@ -129,7 +129,7 @@ public class AVLTree {
         if (root == null) {
             return 0;
         }
-        int result = height(root.left) - height(root.right);
+        int result = height(root.getLeft()) - height(root.getRight());
         return result;
     }
 
@@ -137,21 +137,21 @@ public class AVLTree {
         if (root == null) {
             return -1;
         }
-        return root.height;
+        return root.getHeight();
     }
 
     private static TreeNode leftRotate(TreeNode root) {
         if (root == null) {
             return root;
         }
-        if (root.right == null) {
+        if (root.getRight() == null) {
             return root;
         }
-        TreeNode rightChild = root.right;
-        root.right = rightChild.left;
-        rightChild.left = root;
-        root.height = Math.max(height(root.left), height(root.right)) + 1;
-        rightChild.height = Math.max(height(rightChild.left), height(rightChild.right)) + 1;
+        TreeNode rightChild = root.getRight();
+        root.setRight(rightChild.getLeft());
+        rightChild.setLeft(root);
+        root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);
+        rightChild.setHeight(Math.max(height(rightChild.getLeft()), height(rightChild.getRight())) + 1);
         return rightChild;
     }
 
@@ -159,14 +159,14 @@ public class AVLTree {
         if (root == null) {
             return root;
         }
-        if (root.left == null) {
+        if (root.getLeft() == null) {
             return root;
         }
-        TreeNode leftChild = root.left;
-        root.left = leftChild.right;
-        leftChild.right = root;
-        root.height = Math.max(height(root.left), height(root.right)) + 1;
-        leftChild.height = Math.max(height(leftChild.left), height(leftChild.right)) + 1;
+        TreeNode leftChild = root.getLeft();
+        root.setLeft(leftChild.getRight());
+        leftChild.setRight(root);
+        root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);
+        leftChild.setHeight(Math.max(height(leftChild.getLeft()), height(leftChild.getRight())) + 1);
         return leftChild;
     }
 
@@ -184,7 +184,7 @@ public class AVLTree {
             result.append(new String(new char[startSpacing[currentHeight]]).replace("\0", " "));
             String middleSpace = new String(new char[middleSpacing[currentHeight]]).replace("\0", " ");
             for (int size = nodeList.size(), j = 0; j < size; j++) {
-                String dataString = nodeList.get(j) == null ? "   " : String.format("%3d", nodeList.get(j).data);
+                String dataString = nodeList.get(j) == null ? "   " : String.format("%3d", nodeList.get(j).getData());
                 result.append(dataString);
                 if (j < size - 1) {
                     result.append(middleSpace);
@@ -217,8 +217,8 @@ public class AVLTree {
             List<TreeNode> currentList = result.get(currentDepth++);
             List<TreeNode> nextList = new ArrayList<>();
             for (TreeNode currentNode : currentList) {
-                nextList.add(currentNode != null ? currentNode.left : null);
-                nextList.add(currentNode != null ? currentNode.right : null);
+                nextList.add(currentNode != null ? currentNode.getLeft() : null);
+                nextList.add(currentNode != null ? currentNode.getRight() : null);
             }
             if (notAllNull(nextList))
                 result.add(nextList);

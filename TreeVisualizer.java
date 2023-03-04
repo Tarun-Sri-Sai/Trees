@@ -34,7 +34,7 @@ public class TreeVisualizer {
             result.append(new String(new char[startSpacing[currentHeight]]).replace("\0", " "));
             String middleSpace = new String(new char[middleSpacing[currentHeight]]).replace("\0", " ");
             for (int size = nodeList.size(), j = 0; j < size; ++j) {
-                String dataString = nodeList.get(j) == null ? "   " : String.format("%3d", nodeList.get(j).data);
+                String dataString = nodeList.get(j) == null ? "   " : String.format("%3d", nodeList.get(j).getData());
                 result.append(dataString);
                 if (j < size - 1) {
                     result.append(middleSpace);
@@ -53,11 +53,11 @@ public class TreeVisualizer {
             List<TreeNode> currentList = result.get(currentDepth++);
             List<TreeNode> nextList = new ArrayList<>();
             for (TreeNode currentNode : currentList) {
-                if (currentNode.left != null) {
-                    nextList.add(currentNode.left);
+                if (currentNode.getLeft() != null) {
+                    nextList.add(currentNode.getLeft());
                 }
-                if (currentNode.right != null) {
-                    nextList.add(currentNode.right);
+                if (currentNode.getRight() != null) {
+                    nextList.add(currentNode.getRight());
                 }
             }
             if (nextList.size() > 0) {
