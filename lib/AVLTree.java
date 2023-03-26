@@ -1,3 +1,4 @@
+package lib;
 
 //  AVL Tree Implementation - Java
 public class AVLTree {

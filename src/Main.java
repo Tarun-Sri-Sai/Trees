@@ -1,5 +1,9 @@
+package src;
 import java.io.*;
 import java.util.*;
+
+import lib.AVLTree;
+import lib.TreeVisualizer;
 
 public class Main {
     private static Scanner sc;

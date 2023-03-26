@@ -1,3 +1,5 @@
+package lib;
+
 public class TreeNode {
     private int data, height;
     private TreeNode left, right;
@@ -15,6 +17,7 @@ public class TreeNode {
     public void setData(int data) {
         this.data = data;
     }
+
     public int getHeight() {
         return height;
     }
