@@ -23,6 +23,10 @@ public class TreeVisualizer {
         }
     }
 
+    public void setRoot(TreeNode root) {
+        this.root = root;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
