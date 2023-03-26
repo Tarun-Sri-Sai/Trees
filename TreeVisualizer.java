@@ -37,18 +37,24 @@ public class TreeVisualizer {
             List<TreeNode> nodeList = levelList.get(i);
             int currentHeight = maxDepth - i;
 
-            result.append(new String(new char[startSpacing[currentHeight]]).replace("\0", " "));
-            String middleSpace = new String(new char[middleSpacing[currentHeight]]).replace("\0", " ");
+            result.append(new String(new char[startSpacing[currentHeight]])
+                          .replace("\0", " "));
+            String middleSpace = new String(new char[middleSpacing[currentHeight]])
+                                            .replace("\0", " ");
 
             for (int size = nodeList.size(), j = 0; j < size; ++j) {
-                String dataString = nodeList.get(j) == null ? "   " : String.format("%3d", nodeList.get(j).getData());
+                String dataString = nodeList.get(j) == null 
+                                    ? "   " 
+                                    : String.format("%3d", nodeList.get(j)
+                                                                  .getData());
 
                 result.append(dataString);
                 if (j < size - 1) {
                     result.append(middleSpace);
                 }
             }
-            result.append(new String(new char[currentHeight]).replace("\0", "\n"));
+            result.append(new String(new char[currentHeight])
+                          .replace("\0", "\n"));
         }
         return result.toString();
     }
