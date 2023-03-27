@@ -10,8 +10,8 @@ public class TreeVisualizer {
     private final int MAX_HEIGHT = 15;
     private int[] startSpacing = null, middleSpacing = null;
 
-    public TreeVisualizer(TreeNode root) {
-        this.root = root;
+    public TreeVisualizer() {
+        root = null;
         startSpacing = new int[MAX_HEIGHT];
         startSpacing[0] = 0;
         for (int i = 1; i < 10; ++i) {
@@ -24,8 +24,9 @@ public class TreeVisualizer {
         }
     }
 
-    public void setRoot(TreeNode root) {
+    public TreeVisualizer forRoot(TreeNode root) {
         this.root = root;
+        return this;
     }
 
     @Override
