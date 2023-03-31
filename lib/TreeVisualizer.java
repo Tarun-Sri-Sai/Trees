@@ -72,6 +72,8 @@ public class TreeVisualizer {
 
             for (TreeNode currentNode : currentList) {
                 if (currentNode == null) {
+                    nextList.add(null);
+                    nextList.add(null);
                     continue;
                 }
                 nextList.add(currentNode.getLeft());
