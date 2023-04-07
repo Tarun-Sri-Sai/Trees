@@ -1,9 +1,7 @@
 package src;
+
 import java.io.*;
 import java.util.*;
-
-import lib.AVLTree;
-import lib.TreeVisualizer;
 
 public class Main {
     private static Scanner sc;
@@ -11,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         sc = new Scanner(System.in);
-        bw = new BufferedWriter(new OutputStreamWriter(System.out) );
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
         AVLTree avlTree = new AVLTree();
         Random random = new Random(System.currentTimeMillis());
         final int MAX_NODES = 30;

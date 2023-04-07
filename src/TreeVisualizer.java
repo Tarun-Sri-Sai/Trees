@@ -1,9 +1,11 @@
-package lib;
+package src;
 
 //  TreeNode Visualizer
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import lib.TreeNode;
 
 public class TreeVisualizer {
     private TreeNode root;

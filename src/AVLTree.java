@@ -1,4 +1,6 @@
-package lib;
+package src;
+
+import lib.TreeNode;
 
 //  AVL Tree Implementation - Java
 public class AVLTree {
