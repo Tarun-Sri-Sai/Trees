@@ -1,7 +1,10 @@
-package src;
+package trees.src;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     private static Scanner sc;
