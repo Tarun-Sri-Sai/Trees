@@ -1,6 +1,6 @@
 # Trees
 
-This repository contains a package called `trees`, which provides implementations of various tree data structures. The package contains the following directories:
+This repository contains a package called `trees`, which provides implementations of the AVL tree data structure. The package contains the following directories:
 
 ## lib
 
