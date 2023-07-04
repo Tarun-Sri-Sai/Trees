@@ -14,10 +14,10 @@ MAIN_CLASS=Main
 CLASS_FILES=$(BIN_DIR)/$(PROJECT_DIR)/$(MAIN_CLASS).class
 
 $(CLASS_FILES): $(SOURCE_FILES)
-	$(JC) $(JFLAGS) $^ -d $(PROJECT_DIR)/$(BIN_DIR)
+	@$(JC) $(JFLAGS) $^ -d $(PROJECT_DIR)/$(BIN_DIR)
 
 run: $(CLASS_FILES)
-	java -cp $(PROJECT_DIR)/$(BIN_DIR) $(PROJECT_DIR)/$(SRC_DIR)/$(MAIN_CLASS).java
+	@java -cp $(PROJECT_DIR)/$(BIN_DIR) $(PROJECT_DIR)/$(SRC_DIR)/$(MAIN_CLASS).java
 
 clean:
-	$(RM) *.class
+	@$(RM) *.class
