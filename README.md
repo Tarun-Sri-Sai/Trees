@@ -12,4 +12,4 @@ This directory contains three Java files: `AVLTree.java`, `TreeVisualizer.java`,
 
 ## Makefile
 
-This directory contains a Makefile that can be used to compile and run the program. To run the program, navigate to the `trees` directory and run the `make` command.
+This directory contains a Makefile that can be used to compile and run the program. To run the program, run the `make` command.
