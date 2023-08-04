@@ -1,4 +1,4 @@
-package trees.lib;
+package lib;
 
 public class TreeNode {
     private int data, height;

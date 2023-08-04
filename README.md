@@ -1,6 +1,6 @@
 # Trees
 
-This repository contains a package called `trees`, which provides implementations of the AVL tree data structure. The package contains the following directories:
+This repository provides implementations of the AVL tree data structure. The package contains the following directories:
 
 ## lib
 
@@ -8,8 +8,6 @@ This directory contains a single Java file called `TreeNode.java`. This file con
 
 ## src
 
-This directory contains three Java files: `AVLTree.java`, `TreeVisualizer.java`, and `Main.java`. These files contain the implementation of the AVL tree data structure and an optional visualizer class. The `Main.java` file contains the main class and provides an example of how to use the AVL tree implementation. The program adds at most 30 3-digit numbers to an AVL tree and prints it to the console.
+This directory contains three Java files: `AVLTree.java` and `TreeVisualizer.java`. These files contain the implementation of the AVL tree data structure and an optional visualizer class.
 
-## Makefile
-
-This directory contains a Makefile that can be used to compile and run the program. To run the program, run the `make` command.
+The `Main.java` file contains the main class and provides an example of how to use the AVL tree implementation. The program adds at most 30 3-digit numbers to an AVL tree and prints it to the console.
