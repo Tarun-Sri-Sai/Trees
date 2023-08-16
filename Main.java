@@ -19,7 +19,7 @@ public class Main {
             avlTree.insert(val);
         }
         TreeVisualizer tv = new TreeVisualizer();
-        System.out.println(tv.forRoot(avlTree.getRoot()));
+        System.out.println(tv.forRoot(avlTree.root));
         sc.close();
     }
 

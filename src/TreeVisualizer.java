@@ -4,7 +4,6 @@ package src;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import lib.TreeNode;
 
 public class TreeVisualizer {
@@ -36,50 +35,38 @@ public class TreeVisualizer {
         StringBuilder result = new StringBuilder();
         List<List<TreeNode>> levelList = getLevelOrder();
         int maxDepth = levelList.size() - 1;
-        
         for (int i = 0; i <= maxDepth; ++i) {
             List<TreeNode> nodeList = levelList.get(i);
             int currentHeight = maxDepth - i;
-
-            result.append(new String(new char[startSpacing[currentHeight]])
-                          .replace("\0", " "));
-            String middleSpace = new String(new char[middleSpacing[currentHeight]])
-                                            .replace("\0", " ");
-
+            result.append(new String(new char[startSpacing[currentHeight]]).replace("\0", " "));
+            String middleSpace = new String(new char[middleSpacing[currentHeight]]).replace("\0", " ");
             for (int size = nodeList.size(), j = 0; j < size; ++j) {
-                String dataString = nodeList.get(j) == null 
-                                    ? "   " 
-                                    : String.format("%3d", nodeList.get(j)
-                                                                  .getData());
-
+                String dataString = nodeList.get(j) == null? "   ": String.format("%3d", nodeList.get(j).value);
                 result.append(dataString);
                 if (j < size - 1) {
                     result.append(middleSpace);
                 }
             }
-            result.append(new String(new char[currentHeight])
-                          .replace("\0", "\n"));
+            result.append(new String(new char[currentHeight]).replace("\0", "\n"));
         }
         return result.toString();
     }
 
     private List<List<TreeNode>> getLevelOrder() {
         List<List<TreeNode>> result = new ArrayList<>();
-
         result.add(new ArrayList<>(Arrays.asList(root)));
         int currentDepth = 0;
         while (currentDepth < result.size()) {
             List<TreeNode> currentList = result.get(currentDepth++);
             List<TreeNode> nextList = new ArrayList<>();
-
             for (TreeNode currentNode : currentList) {
                 if (currentNode == null) {
                     nextList.add(null);
                     nextList.add(null);
                     continue;
                 }
-                nextList.add(currentNode.getLeft());
-                nextList.add(currentNode.getRight());
+                nextList.add(currentNode.left);
+                nextList.add(currentNode.right);
             }
             if (isNotAllNull(nextList)) {
                 result.add(nextList);
