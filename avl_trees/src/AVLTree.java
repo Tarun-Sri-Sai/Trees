@@ -1,10 +1,10 @@
 package src;
 
-import lib.TreeNode;
+import lib.AVLTreeNode;
 
 //  AVL Tree Implementation - Java
 public class AVLTree {
-    public TreeNode root;
+    public AVLTreeNode root;
 
     public AVLTree() {
         root = null;
@@ -14,7 +14,7 @@ public class AVLTree {
         root = delete(root, data);
     }
 
-    private static TreeNode delete(TreeNode root, int data) {
+    private static AVLTreeNode delete(AVLTreeNode root, int data) {
 
         // empty tree
         if (root == null) {
@@ -75,7 +75,7 @@ public class AVLTree {
         return root;
     }
 
-    private static int getMax(TreeNode root) {
+    private static int getMax(AVLTreeNode root) {
         if (root == null) {
             return Integer.MIN_VALUE;
         }
@@ -91,7 +91,7 @@ public class AVLTree {
         return result;
     }
 
-    private static boolean search(TreeNode root, int data) {
+    private static boolean search(AVLTreeNode root, int data) {
         if (root == null) {
             return false;
         }
@@ -110,11 +110,11 @@ public class AVLTree {
         root = insert(root, data);
     }
 
-    private static TreeNode insert(TreeNode root, int data) {
+    private static AVLTreeNode insert(AVLTreeNode root, int data) {
 
         // create new node at target location
         if (root == null) {
-            return new TreeNode(data);
+            return new AVLTreeNode(data);
         }
 
         // target in left subtree
@@ -165,7 +165,7 @@ public class AVLTree {
         return root;
     }
 
-    private static int getBalanceFactor(TreeNode root) {
+    private static int getBalanceFactor(AVLTreeNode root) {
         if (root == null) {
             return 0;
         }
@@ -173,21 +173,21 @@ public class AVLTree {
         return result;
     }
 
-    private static int height(TreeNode root) {
+    private static int height(AVLTreeNode root) {
         if (root == null) {
             return -1;
         }
         return root.height;
     }
 
-    private static TreeNode leftRotate(TreeNode root) {
+    private static AVLTreeNode leftRotate(AVLTreeNode root) {
         if (root == null) {
             return root;
         }
         if (root.right == null) {
             return root;
         }
-        TreeNode rightChild = root.right;
+        AVLTreeNode rightChild = root.right;
         root.right = rightChild.left;
         rightChild.left = root;
         root.height = Math.max(height(root.left), height(root.right)) + 1;
@@ -195,14 +195,14 @@ public class AVLTree {
         return rightChild;
     }
 
-    private static TreeNode rightRotate(TreeNode root) {
+    private static AVLTreeNode rightRotate(AVLTreeNode root) {
         if (root == null) {
             return root;
         }
         if (root.left == null) {
             return root;
         }
-        TreeNode leftChild = root.left;
+        AVLTreeNode leftChild = root.left;
         root.left = leftChild.right;
         leftChild.right = root;
         root.height = Math.max(height(root.left), height(root.right)) + 1;

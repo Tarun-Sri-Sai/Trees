@@ -1,10 +1,10 @@
 package lib;
 
-public class TreeNode {
+public class AVLTreeNode {
     public int value, height;
-    public TreeNode left, right;
+    public AVLTreeNode left, right;
 
-    public TreeNode(int value) {
+    public AVLTreeNode(int value) {
         this.value = value;
         this.height = 0;
         this.left = this.right = null;

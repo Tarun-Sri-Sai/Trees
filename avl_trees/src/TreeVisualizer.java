@@ -4,10 +4,10 @@ package src;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import lib.TreeNode;
+import lib.AVLTreeNode;
 
 public class TreeVisualizer {
-    private TreeNode root;
+    private AVLTreeNode root;
     private final int MAX_HEIGHT = 15;
     private int[] startSpacing = null, middleSpacing = null;
 
@@ -25,7 +25,7 @@ public class TreeVisualizer {
         }
     }
 
-    public TreeVisualizer forRoot(TreeNode root) {
+    public TreeVisualizer forRoot(AVLTreeNode root) {
         this.root = root;
         return this;
     }
@@ -33,10 +33,10 @@ public class TreeVisualizer {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        List<List<TreeNode>> levelList = getLevelOrder();
+        List<List<AVLTreeNode>> levelList = getLevelOrder();
         int maxDepth = levelList.size() - 1;
         for (int i = 0; i <= maxDepth; ++i) {
-            List<TreeNode> nodeList = levelList.get(i);
+            List<AVLTreeNode> nodeList = levelList.get(i);
             int currentHeight = maxDepth - i;
             result.append(new String(new char[startSpacing[currentHeight]]).replace("\0", " "));
             String middleSpace = new String(new char[middleSpacing[currentHeight]]).replace("\0", " ");
@@ -52,14 +52,14 @@ public class TreeVisualizer {
         return result.toString();
     }
 
-    private List<List<TreeNode>> getLevelOrder() {
-        List<List<TreeNode>> result = new ArrayList<>();
+    private List<List<AVLTreeNode>> getLevelOrder() {
+        List<List<AVLTreeNode>> result = new ArrayList<>();
         result.add(new ArrayList<>(Arrays.asList(root)));
         int currentDepth = 0;
         while (currentDepth < result.size()) {
-            List<TreeNode> currentList = result.get(currentDepth++);
-            List<TreeNode> nextList = new ArrayList<>();
-            for (TreeNode currentNode : currentList) {
+            List<AVLTreeNode> currentList = result.get(currentDepth++);
+            List<AVLTreeNode> nextList = new ArrayList<>();
+            for (AVLTreeNode currentNode : currentList) {
                 if (currentNode == null) {
                     nextList.add(null);
                     nextList.add(null);
@@ -75,8 +75,8 @@ public class TreeVisualizer {
         return result;
     }
 
-    private boolean isNotAllNull(List<TreeNode> list) {
-        for (TreeNode ele : list) {
+    private boolean isNotAllNull(List<AVLTreeNode> list) {
+        for (AVLTreeNode ele : list) {
             if (ele != null) {
                 return true;
             }
